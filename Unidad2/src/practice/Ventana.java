@@ -1,9 +1,11 @@
 package practice;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Ventana extends JFrame{
 	
@@ -15,12 +17,26 @@ public class Ventana extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
 		
-		JLabel etiqueta1 = new JLabel("Bienvenido");
+		JPanel login= new JPanel();
+		login.setVisible(true);
+		login.setLocation(0,0);
+		login.setSize(500,500);
+		login.setOpaque(true);
+		login.setBackground(Color.blue);
+		login.setLayout(null);
 		
-		etiqueta1.setSize(100,100);
-		etiqueta1.setLocation(10,50);
-		etiqueta1.setBackground(Color.ORANGE);
-		this.add(etiqueta1);
+		this.add(login);
+		this.repaint();
+		
+		
+		JLabel etiqueta1 = new JLabel("Bienvenido");
+		etiqueta1.setSize(160,40);
+		etiqueta1.setLocation(160,10);
+		etiqueta1.setBackground(Color.WHITE);
+		etiqueta1.setOpaque(true);
+		etiqueta1.setFont(new Font("Arial",Font.BOLD,25));
+		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
+		login.add(etiqueta1);
 		
 		
 		
