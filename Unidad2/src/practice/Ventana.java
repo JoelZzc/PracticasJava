@@ -1,7 +1,7 @@
 package practice;
 
 import java.awt.Color;
-
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 public class Ventana extends JFrame{
@@ -25,9 +27,12 @@ public class Ventana extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
 		
-		this.add(this.Registro());
+		//this.add(this.Registro());
 		//this.add(this.login());
+		this.add(this.users());
 		this.repaint();
+		this.setMinimumSize(new Dimension(1000,500));
+		this.setMaximumSize(new Dimension(1000,500));
 	}
 	
 	public JPanel login () {
@@ -183,5 +188,89 @@ public class Ventana extends JFrame{
 		return panelRegistro;
 	}
 	
-	
+	public JPanel users() {
+		
+		JPanel panelTabla = new JPanel();
+		panelTabla.setVisible(true);
+		panelTabla.setLocation(0,0);
+		panelTabla.setSize(1000,500);
+		panelTabla.setBackground(Color.CYAN);
+		panelTabla.setOpaque(true);
+		panelTabla.setLayout(null);
+		
+		JLabel etiqueta1 = new JLabel("Usuarios");
+		etiqueta1.setSize(180,40);
+		etiqueta1.setLocation(400,10);
+		etiqueta1.setFont(new Font("Arial",Font.BOLD,25));
+		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
+		panelTabla.add(etiqueta1);
+		
+		JLabel text1 = new JLabel("Total de usuarios");
+		text1.setBounds(50, 70, 180, 40);
+		text1.setOpaque(true);
+		text1.setFont(new Font("Arial",Font.BOLD,14));
+		text1.setHorizontalAlignment(JLabel.CENTER);
+		panelTabla.add(text1);
+		
+		JLabel text2 = new JLabel("90");
+		text2.setBounds(50, 100, 180, 40);
+		text2.setOpaque(true);
+		text2.setFont(new Font("Arial",Font.BOLD,14));
+		text2.setHorizontalAlignment(JLabel.CENTER);
+		panelTabla.add(text2);
+		
+		JLabel widget = new JLabel();
+		widget.setBounds(30, 60, 220, 100);
+		widget.setOpaque(true);
+		widget.setBorder(BorderFactory.createLineBorder(Color.black,2));
+		panelTabla.add(widget);
+		
+		JButton export = new JButton("Exportar");
+		export.setBounds(700, 140, 120, 40);
+		export.setBorder(BorderFactory.createLineBorder(Color.black,2));
+		panelTabla.add(export);
+		
+		JButton add = new JButton("Añadir");
+		add.setBounds(840, 140, 120, 40);
+		add.setBorder(BorderFactory.createLineBorder(Color.black,2));
+		panelTabla.add(add);
+		
+		
+		String[] columnNames= {
+				"First Name",
+				"First Name",
+				"First Name",
+				"First Name",
+				"First Name",
+		};
+		
+		Object[][]data= {
+				{"Joel","Zazueta", "Carrillo", 2005, true},
+				{"Lhucas", "Huml", "Patinar",1999,true},
+				{"Kathya", "Walrath", "Escalar", 2000,false},
+				{"Marcus", "Andrews", "Correr",1997,true},
+				{"Angela", "Lalth", "Nadar",1999,false},
+				{"Joel","Zazueta", "Carrillo", 2005, true},
+				{"Lhucas", "Huml", "Patinar",1999,true},
+				{"Kathya", "Walrath", "Escalar", 2000,false},
+				{"Marcus", "Andrews", "Correr",1997,true},
+				{"Angela", "Lalth", "Nadar",1999,false},
+				{"Joel","Zazueta", "Carrillo", 2005, true},
+				{"Lhucas", "Huml", "Patinar",1999,true},
+				{"Kathya", "Walrath", "Escalar", 2000,false},
+				{"Marcus", "Andrews", "Correr",1997,true},
+				{"Angela", "Lalth", "Nadar",1999,false}
+		};		
+		
+		JTable table = new JTable(data,columnNames);
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(30, 200, 930, 200);
+		panelTabla.add(scrollPane);
+
+		
+		panelTabla.revalidate();
+		
+		
+		return panelTabla;
+	}
 }
