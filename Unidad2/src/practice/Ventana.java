@@ -6,6 +6,7 @@ import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -28,11 +29,11 @@ public class Ventana extends JFrame{
 		this.setResizable(true);
 		
 		//this.add(this.Registro());
-		//this.add(this.login());
-		this.add(this.users());
+		this.add(this.login());
+		//this.add(this.users());
 		this.repaint();
-		this.setMinimumSize(new Dimension(1000,500));
-		this.setMaximumSize(new Dimension(1000,500));
+		this.setMinimumSize(new Dimension(500,500));
+		this.setMaximumSize(new Dimension(500,500));
 	}
 	
 	public JPanel login () {
@@ -41,6 +42,7 @@ public class Ventana extends JFrame{
 		panelLogin.setVisible(true);
 		panelLogin.setLocation(0,0);
 		panelLogin.setSize(500,500);
+		panelLogin.setBackground(new Color(128,0,128));
 		panelLogin.setOpaque(true);
 		panelLogin.setLayout(null);
 		
@@ -50,49 +52,64 @@ public class Ventana extends JFrame{
 		etiqueta1.setSize(160,40);
 		etiqueta1.setLocation(160,10);
 		etiqueta1.setFont(new Font("Arial",Font.BOLD,25));
+		etiqueta1.setForeground(Color.WHITE);
 		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
 		panelLogin.add(etiqueta1);
 		
 		JLabel etiqueta2 = new JLabel("Nombre de usuario ");
 		etiqueta2.setSize(180,25);
-		etiqueta2.setLocation(30,100);
-		etiqueta2.setFont(new Font("Arial",Font.BOLD,15));
+		etiqueta2.setLocation(90,80);
+		etiqueta2.setForeground(Color.WHITE);
+		etiqueta2.setFont(new Font("Arial",Font.BOLD,12));
 		panelLogin.add(etiqueta2);
 		
+		JLabel imagenUser = new JLabel(new ImageIcon("name.png"));
+		imagenUser.setBounds(30, 100, 30, 30);
+		panelLogin.add(imagenUser);
+		
 		JTextField nombreUsuario = new JTextField();
-		nombreUsuario.setBounds(230, 100, 180,25);
+		nombreUsuario.setBounds(90, 100,300,30);
 		nombreUsuario.setText("Nombre de usuario..." );
 		panelLogin.add(nombreUsuario);
 		
 		JLabel contraseña = new JLabel("Contraseña ");
 		contraseña.setSize(180,25);
-		contraseña.setLocation(30,160);
-		contraseña.setFont(new Font("Arial",Font.BOLD,15));
+		contraseña.setLocation(90,170);
+		contraseña.setForeground(Color.WHITE);
+		contraseña.setFont(new Font("Arial",Font.BOLD,12));
 		panelLogin.add(contraseña);
 		
 		JTextField contraseña2 = new JTextField();
-		contraseña2.setBounds(230, 160, 180,25);
+		contraseña2.setBounds(90, 190, 300,30);
 		contraseña2.setText("Contraseña..." );
 		panelLogin.add(contraseña2);
 		
+		JLabel imagenLock = new JLabel(new ImageIcon("lock2.png"));
+		imagenLock.setBounds(30, 190, 35, 60);
+		panelLogin.add(imagenLock);
+		
 		JCheckBox checkBox1 = new JCheckBox("Recordar mi contraseña");
-        checkBox1.setBounds(30,220,180,25);
+        checkBox1.setBounds(160,250,160,20);
         panelLogin.add(checkBox1);
 		
         JLabel olvideContraseña = new JLabel("¿Olvidaste tu contraseña?");
-        olvideContraseña.setBounds(230,220,180,25);
+        olvideContraseña.setBounds(160,280,160,20);
         olvideContraseña.setFont(new Font("Arial",Font.BOLD,12));
+        olvideContraseña.setForeground(Color.WHITE);
+		olvideContraseña.setHorizontalAlignment(JLabel.CENTER);
+		
         panelLogin.add(olvideContraseña);
 		
 		JButton iniciar = new JButton("Siguiente");
-		iniciar.setBounds(230,280,180,25);
+		iniciar.setBounds(280,400,180,25);
 		iniciar.setFont(new Font("Arial",Font.BOLD,12));
 		panelLogin.add(iniciar);
 		
 		JButton crearCuenta = new JButton("Crear cuenta");
-		crearCuenta.setBounds(30,280,180,25);
+		crearCuenta.setBounds(30,400,180,25);
 		crearCuenta.setFont(new Font("Arial",Font.BOLD,12));
 		panelLogin.add(crearCuenta);
+		
 		
 		this.repaint();
 		
