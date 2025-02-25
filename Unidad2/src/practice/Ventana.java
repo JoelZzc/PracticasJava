@@ -12,8 +12,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -31,9 +35,35 @@ public class Ventana extends JFrame{
 		//this.add(this.Registro());
 		this.add(this.login());
 		//this.add(this.users());
-		this.repaint();
 		this.setMinimumSize(new Dimension(500,500));
 		this.setMaximumSize(new Dimension(500,500));
+		
+		JMenuBar barra= new JMenuBar(); //barra de menus
+		
+		JMenu menu1 = new JMenu("Archivo");
+		JMenuItem op_abrir= new JMenuItem("Abrir");
+		JMenuItem op_nuevo= new JMenuItem("Nuevo");
+		JMenuItem op_guardar= new JMenuItem("Guardar");
+		JMenuItem op_cerrar= new JMenuItem("Cerrar");
+		menu1.add(op_abrir);
+		menu1.add(op_nuevo);
+		menu1.add(op_guardar);
+		menu1.add(op_cerrar);
+		
+		JMenu menu2 = new JMenu("Ayuda");
+		JRadioButtonMenuItem op_help= new JRadioButtonMenuItem("Manual de usuario");
+		JMenuItem op_soporte= new JMenuItem("Soporte");
+		menu2.add(op_help);
+		menu2.add(op_soporte);
+		
+		barra.add(menu1);
+		barra.add(menu2);
+		
+		this.setJMenuBar(barra);
+		this.repaint();
+		this.revalidate();
+
+
 	}
 	
 	public JPanel login () {
@@ -290,4 +320,14 @@ public class Ventana extends JFrame{
 		
 		return panelTabla;
 	}
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
