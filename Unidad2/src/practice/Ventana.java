@@ -1,8 +1,10 @@
 package practice;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -33,8 +35,10 @@ public class Ventana extends JFrame{
 		this.setResizable(true);
 		
 		//this.add(this.Registro());
-		this.add(this.login());
+		//this.add(this.login());
 		//this.add(this.users());
+		this.add(this.calculadoraLayouts());
+
 		this.setMinimumSize(new Dimension(500,500));
 		this.setMaximumSize(new Dimension(500,500));
 		
@@ -68,6 +72,14 @@ public class Ventana extends JFrame{
 	
 	public JPanel login () {
 		
+		JPanel panelFondo= new JPanel();
+		panelFondo.setVisible(true);
+		panelFondo.setLocation(0,0);
+		panelFondo.setSize(1000,1000);
+		panelFondo.setBackground(Color.BLACK);
+		panelFondo.setOpaque(true);
+		panelFondo.setLayout(null);
+		
 		JPanel panelLogin= new JPanel();
 		panelLogin.setVisible(true);
 		panelLogin.setLocation(0,0);
@@ -75,7 +87,7 @@ public class Ventana extends JFrame{
 		panelLogin.setBackground(new Color(128,0,128));
 		panelLogin.setOpaque(true);
 		panelLogin.setLayout(null);
-		
+		panelFondo.add(panelLogin);
 		
 		
 		JLabel etiqueta1 = new JLabel("Inicia sesión");
@@ -143,7 +155,7 @@ public class Ventana extends JFrame{
 		
 		this.repaint();
 		
-		return panelLogin;
+		return panelFondo;
 	}	
 	
 	public JPanel Registro() {
@@ -321,7 +333,92 @@ public class Ventana extends JFrame{
 		return panelTabla;
 	}
 		
-	
+	public JPanel calculadoraLayouts() {
+		
+		
+		
+		JPanel panel_calculadora = new JPanel();
+		panel_calculadora.setVisible(true);
+		panel_calculadora.setLocation(0,0);
+		panel_calculadora.setSize(500,500);
+		panel_calculadora.setOpaque(true);
+		panel_calculadora.setLayout(null);
+		panel_calculadora.setBackground(Color.BLACK);
+		panel_calculadora.setLayout(new BorderLayout());
+		
+		
+		JLabel digitos = new JLabel("123+32+22");
+		//digitos.setSize(500,30);
+		//digitos.setBounds(10,10,460,50);
+		digitos.setFont(new Font("Arial",Font.BOLD,25));
+		digitos.setHorizontalAlignment(JLabel.CENTER);
+		digitos.setOpaque(true);
+		panel_calculadora.add(digitos,BorderLayout.NORTH);
+		
+		/*String [] arregloBotones= {
+				"7","8","9","7","/",
+				"4","5","6","*",
+				"1","2","3","-",
+				"0",".","=","+"
+		};
+		
+		
+		
+		for(String arreglobotones: arregloBotones);{
+			botones.add(arregloBotones);
+			botones.setBackground(Color.GRAY);
+			botones.setFont(new Font("Arial",Font.BOLD,20));
+
+		}*/
+		JPanel botones = new JPanel();
+				JButton siete = new JButton("7");
+				JButton ocho = new JButton("8");
+				JButton nueve = new JButton("9");
+				JButton division = new JButton("/");
+				JButton cuatro = new JButton("4");
+				JButton cinco = new JButton("5");
+				JButton seis = new JButton("6");
+				JButton multiplicacion = new JButton("*");
+				JButton uno = new JButton("1");
+				JButton dos = new JButton("2");
+				JButton tres = new JButton("3");
+				JButton resta = new JButton("-");
+				JButton cero = new JButton("0");
+				JButton punto = new JButton(".");
+				JButton igual = new JButton("=");
+				JButton suma = new JButton("+");
+				
+		botones.add(siete);
+		botones.add(ocho);
+		botones.add(nueve);
+		botones.add(division);
+		botones.add(cuatro);
+		botones.add(cinco);
+		botones.add(seis);
+		botones.add(multiplicacion);
+		botones.add(uno);
+		botones.add(dos);
+		botones.add(tres);
+		botones.add(resta);
+		botones.add(cero);
+		botones.add(punto);
+		botones.add(igual);
+		botones.add(suma);
+		
+		botones.setLayout(new GridLayout(4,5));
+		//botones.setSize(400,400);
+		botones.setVisible(true);
+		botones.setOpaque(true);
+		panel_calculadora.add(botones,BorderLayout.CENTER);
+		
+			
+;		
+		
+		
+		
+		
+		return panel_calculadora;
+	}
 	
 	
 	
