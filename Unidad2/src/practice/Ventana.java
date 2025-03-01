@@ -30,17 +30,19 @@ public class Ventana extends JFrame{
 		this.setTitle(title);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(500,500);
+		this.setSize(600,800);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
 		
 		//this.add(this.Registro());
 		//this.add(this.login());
 		//this.add(this.users());
-		this.add(this.calculadoraLayouts());
+		//this.add(this.calculadoraLayouts());
+		this.add(this.interfaz());
 
-		this.setMinimumSize(new Dimension(500,500));
-		this.setMaximumSize(new Dimension(500,500));
+		
+		this.setMinimumSize(new Dimension(600,800));
+		this.setMaximumSize(new Dimension(1000,1000));
 		
 		JMenuBar barra= new JMenuBar(); //barra de menus
 		
@@ -420,6 +422,124 @@ public class Ventana extends JFrame{
 		return panel_calculadora;
 	}
 	
+	public JPanel interfaz() {
+		JPanel panelFondo= new JPanel();
+		panelFondo.setVisible(true);
+		panelFondo.setSize(1000,1000);
+		panelFondo.setBackground(Color.WHITE);
+		panelFondo.setOpaque(true);
+		panelFondo.setLayout(new BorderLayout());
+
+		
+		JLabel title = new JLabel("Interés");
+		title.setSize(160,40);
+		//title.setLocation(0,10);
+		title.setFont(new Font("Arial",Font.ITALIC,25));
+		title.setForeground(Color.RED);
+		title.setHorizontalAlignment(JLabel.CENTER);
+		panelFondo.add(title,BorderLayout.NORTH);
+		
+		JPanel panelInteres= new JPanel();
+		panelInteres.setVisible(true);
+		panelInteres.setBackground(new Color(51,255,125));
+		panelInteres.setOpaque(true);
+		panelInteres.setLayout(new GridLayout(4,2,30,90));
+		panelInteres.setBorder(BorderFactory.createTitledBorder("Calcular interés"));
+		panelFondo.add(panelInteres,BorderLayout.CENTER);
+		
+		//items panel interés
+		
+		JLabel capital = new JLabel("Capital: ");
+		capital.setForeground(Color.BLACK);
+		capital.setFont(new Font("Arial",Font.BOLD,18));
+		capital.setHorizontalAlignment(JLabel.CENTER);
+		capital.setBorder(BorderFactory.createLineBorder(new Color(51,255,125), 3));
+		panelInteres.add(capital);
+		
+		JTextField capital_input = new JTextField();
+		capital_input.setText("1222" );
+		capital_input.setFont(new Font("Arial",Font.BOLD,18));
+		capital_input.setBorder(BorderFactory.createLineBorder(new Color(51,255,125), 3));
+		panelInteres.add(capital_input);
+		
+		JLabel tiempo_tag = new JLabel("Tiempo: ");
+		tiempo_tag.setForeground(Color.BLACK);
+		tiempo_tag.setFont(new Font("Arial",Font.BOLD,18));
+		tiempo_tag.setHorizontalAlignment(JLabel.CENTER);
+		tiempo_tag.setBorder(BorderFactory.createLineBorder(new Color(51,255,125), 3));
+
+		panelInteres.add(tiempo_tag);
+		
+		JTextField tiempo_input = new JTextField();
+		tiempo_input.setText("2" );
+		tiempo_input.setFont(new Font("Arial",Font.BOLD,18));
+		tiempo_input.setBorder(BorderFactory.createLineBorder(new Color(51,255,125), 3));
+
+		panelInteres.add(tiempo_input);
+		
+		JLabel tasainteres_tag = new JLabel("Tasa interés:");
+		tasainteres_tag.setForeground(Color.BLACK);
+		tasainteres_tag.setFont(new Font("Arial",Font.BOLD,18));
+		tasainteres_tag.setHorizontalAlignment(JLabel.CENTER);
+		tasainteres_tag.setBorder(BorderFactory.createLineBorder(new Color(51,255,125), 3));
+
+		panelInteres.add(tasainteres_tag);
+		
+		JTextField tasainteres_input = new JTextField();
+		tasainteres_input.setText("0.1" );
+		tasainteres_input.setFont(new Font("Arial",Font.BOLD,18));
+		tasainteres_input.setBorder(BorderFactory.createLineBorder(new Color(51,255,125), 3));
+
+		panelInteres.add(tasainteres_input);
+		
+		//Botones
+		JButton calcular = new JButton("Calcular");
+		calcular.setFont(new Font("Arial",Font.BOLD,18));
+		calcular.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+
+		panelInteres.add(calcular);
+		
+		JButton cancelar = new JButton("Cancelar");
+		cancelar.setFont(new Font("Arial",Font.BOLD,18));
+		cancelar.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+		panelInteres.add(cancelar);
+		
+		JPanel footer= new JPanel();
+		footer.setVisible(true);
+		footer.setBackground(new Color(255,51,134));
+		footer.setOpaque(true);
+		footer.setLayout(new GridLayout(2,2,30,200));
+		panelFondo.add(footer,BorderLayout.SOUTH);
+		//items footer
+		JLabel interes_tag= new JLabel("Interés");
+		interes_tag.setFont(new Font("Arial",Font.BOLD,20));
+		interes_tag.setHorizontalAlignment(JLabel.CENTER);
+		interes_tag.setBorder(BorderFactory.createLineBorder(new Color(255,51,134), 3));
+		
+		JTextField interes_input= new JTextField("123.212");
+		interes_input.setFont(new Font("Arial",Font.BOLD,20));
+		interes_input.setBorder(BorderFactory.createLineBorder(new Color(255,51,134), 3));
+		
+		JLabel amount_tag= new JLabel("Monto:");
+		amount_tag.setFont(new Font("Arial",Font.BOLD,20));
+		amount_tag.setHorizontalAlignment(JLabel.CENTER);
+		amount_tag.setBorder(BorderFactory.createLineBorder(new Color(255,51,134), 3));
+		
+		JTextField amount_input= new JTextField("12223.212");
+		amount_input.setFont(new Font("Arial",Font.BOLD,20));
+		amount_input.setBorder(BorderFactory.createLineBorder(new Color(255,51,134), 3));
+
+		
+		footer.add(interes_tag);
+		footer.add(interes_input);
+		
+		footer.add(amount_tag);
+		footer.add(amount_input);
+		
+		
+		this.repaint();
+		return panelFondo;
+	}
 	
 	
 	
