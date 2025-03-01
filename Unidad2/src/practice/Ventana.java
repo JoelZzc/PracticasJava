@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -33,6 +35,10 @@ public class Ventana extends JFrame{
 		this.setSize(600,800);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
+		ImageIcon imageIcon = new ImageIcon("website.png");
+		Image image=imageIcon.getImage();
+	    this.setIconImage(image);
+
 		
 		//this.add(this.Registro());
 		//this.add(this.login());
