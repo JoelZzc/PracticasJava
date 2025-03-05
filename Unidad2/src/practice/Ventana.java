@@ -1,9 +1,12 @@
 package practice;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -32,8 +35,9 @@ public class Ventana extends JFrame{
 		this.setTitle(title);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(600,800);
+		this.setSize(1000,600);
 		this.setLocationRelativeTo(null);
+		this.setBackground(Color.black);
 		this.setResizable(true);
 		ImageIcon imageIcon = new ImageIcon("website.png");
 		Image image=imageIcon.getImage();
@@ -44,7 +48,7 @@ public class Ventana extends JFrame{
 		//this.add(this.login());
 		//this.add(this.users());
 		//this.add(this.calculadoraLayouts());
-		this.add(this.interfaz());
+		//this.add(this.interfaz());
 
 		
 		this.setMinimumSize(new Dimension(600,800));
@@ -545,6 +549,55 @@ public class Ventana extends JFrame{
 		
 		this.repaint();
 		return panelFondo;
+	}
+	
+	
+	public void paint(Graphics g) {
+		
+		super.paint(g);
+		
+		Graphics2D g2= (Graphics2D) g;
+		g2.setColor(Color.RED);
+		g2.drawRect(80, 80, 400, 400);
+		g2.fillRect(200, 200, 200, 200);
+		g2.clearRect(220, 220, 50, 50);
+		
+		g2.setColor(Color.blue);
+		g2.fillRoundRect(400, 80, 200, 200, 30, 30);
+	
+		g2.setColor(Color.green);
+		g2.setStroke(new BasicStroke(5));
+		g2.drawLine(100, 100, 900, 500);
+		
+		g2.drawOval(400, 400, 90, 90);
+		g2.fillOval(400, 450, 75, 150);
+		
+		g2.setColor(new Color(207,147,240));
+		g2.drawArc(600,200,100,100,1,-180);
+		g2.fillArc(600,200,100,100,1,180);
+		
+		g2.setColor(Color.decode("#33A7F1"));
+		g2.setFont(new Font("Arial",Font.BOLD,25));
+
+		g2.drawString("Hola como andamos", 350, 200);
+		
+		ImageIcon img = new ImageIcon("mono.png");
+		Image imagen=img.getImage();		
+		g2.drawImage(imagen, 800, 250, 100, 100,Color.gray, null);
+		
+		int[] xs= {100,100,400};
+		int[] ys= {100,200,400};
+		
+		g2.drawPolygon(xs,ys,3);
+		
+		int[] xs2= {600,500,400};
+		int[] ys2= {100,200,400};
+		
+		g2.drawPolygon(xs2,ys2,3);
+		
+		
+
+		
 	}
 	
 	

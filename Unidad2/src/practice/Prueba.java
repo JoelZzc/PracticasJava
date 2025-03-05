@@ -31,6 +31,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JMenuBar;
 import java.awt.Insets;
 import javax.swing.JMenuItem;
+import javax.swing.Icon;
 
 public class Prueba extends JFrame {
 
@@ -162,8 +163,8 @@ public class Prueba extends JFrame {
 		panel_1.add(panel_3);
 		panel_3.setLayout(null);
 		
-		JLabel imagenUser = new JLabel(new ImageIcon("user.png"));
-		imagenUser.setLocation(125, 21);
+		JLabel imagenUser = new JLabel(new ImageIcon("C:\\Users\\SEARS\\git\\PracticasJava\\Unidad2\\user.png"));
+		imagenUser.setLocation(126, 10);
 		imagenUser.setSize(160,160);
 		panel_3.add(imagenUser);
 		

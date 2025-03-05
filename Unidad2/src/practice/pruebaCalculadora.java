@@ -6,6 +6,7 @@ public class pruebaCalculadora {
 		
 		
 		Calculadora ventana = new Calculadora("Calculadora");
+		
 
 	}
 
