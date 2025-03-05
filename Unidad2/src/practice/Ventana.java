@@ -38,7 +38,7 @@ public class Ventana extends JFrame{
 		ImageIcon imageIcon = new ImageIcon("website.png");
 		Image image=imageIcon.getImage();
 	    this.setIconImage(image);
-
+    
 		
 		//this.add(this.Registro());
 		//this.add(this.login());
