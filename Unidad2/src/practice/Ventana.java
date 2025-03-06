@@ -33,11 +33,11 @@ public class Ventana extends JFrame{
 	
 	public Ventana(String title) {
 		this.setTitle(title);
-		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1000,600);
+		this.setSize(1000,650);
 		this.setLocationRelativeTo(null);
-		this.setBackground(Color.black);
+		this.getContentPane().setBackground(new Color(43, 90, 145));
+		this.setVisible(true);
 		this.setResizable(true);
 		ImageIcon imageIcon = new ImageIcon("website.png");
 		Image image=imageIcon.getImage();
@@ -51,8 +51,8 @@ public class Ventana extends JFrame{
 		//this.add(this.interfaz());
 
 		
-		this.setMinimumSize(new Dimension(600,800));
-		this.setMaximumSize(new Dimension(1000,1000));
+		this.setMinimumSize(new Dimension(1000,650));
+		//this.setMaximumSize(new Dimension(1000,1000));
 		
 		JMenuBar barra= new JMenuBar(); //barra de menus
 		
@@ -551,7 +551,7 @@ public class Ventana extends JFrame{
 		return panelFondo;
 	}
 	
-	
+	/*
 	public void paint(Graphics g) {
 		
 		super.paint(g);
@@ -600,6 +600,77 @@ public class Ventana extends JFrame{
 		
 	}
 	
+	*/
+	
+	public void paint(Graphics g) {
+		super.paint(g);
+		
+		Graphics2D g2= (Graphics2D) g;
+		
+		// Estrellas en el cielo
+	    g2.setColor(new Color(233, 238, 243));
+	    for (int i = 0; i < 100; i++) {  
+	        int x = (int) (Math.random() * getWidth()); 
+	        int y = (int) (Math.random() * 300); 
+	        int size = (int) (Math.random() * 3 + 1);
+	        g2.fillOval(x, y, size, size);
+	    }
+	    
+		g2.setColor(new Color(86, 84, 83));		
+		g2.fillRect(0, 780,getWidth(),50);
+		g2.setColor(new Color(67, 179, 15));	//suelo
+		g2.fillRect(0, 740,getWidth(),40);
+		g2.setColor(new Color(74, 76, 73));	
+		g2.fillRect(500, 700,600,40);
+		
+		g2.setColor(new Color(74, 76, 73));	
+		g2.fillRect(500, 700,600,40);			//casa
+		g2.setColor(new Color(243, 243, 72));	
+		g2.fillRect(540, 300, 500, 400);
+		
+		g2.setColor(Color.RED); //techo
+        int[] xs = {525, 1050, 800};
+        int[] ys = {300, 300, 150};
+        g2.fillPolygon(xs, ys, 3);
+        
+        g2.setColor(new Color(172, 124, 59)); //puerta
+        g2.fillRect(600, 490, 150, 210);
+        g2.setColor(new Color(238, 233, 226));  
+        g2.fillOval(725, 620, 20, 20); 
+
+       		
+        g2.setColor(new Color(238, 233, 226)); //Ventana
+        g2.fillRect(870, 440, 100, 100);
+        g2.setColor(Color.BLACK);
+        g2.fillRect(915, 440, 10, 100); // vertical
+        g2.fillRect(870, 490, 100, 5); //horizontal
+        
+        
+        g2.setColor(new Color(132, 129, 125));
+        g2.fillRect(855, 530, 130, 15); // borde ventana 
+        
+        g2.setColor(new Color(132, 129, 125)); //chimenea
+        g2.fillRect(620, 200, 40, 80); // Base
+        g2.fillRect(630, 140, 20, 60); // Parte superior
+        
+     // Cerco
+        g2.setColor(new Color(139, 69, 19));
+        int cercoHeight = 80; 
+        int cercoYPosition = 700;
+        int cercoTopYPosition = 680;
+        
+        for (int i = 0; i < getWidth() / 60; i++) {
+            g2.fillRect(i * 60, cercoYPosition, 50, cercoHeight); // Las tablas
+            int[] xPointsCerco = {i * 60, i * 60 + 50, i * 60 + 25}; 
+            int[] yPointsCerco = {cercoYPosition, cercoYPosition, cercoTopYPosition}; 
+            g2.fillPolygon(xPointsCerco, yPointsCerco, 3); 
+        }
+        
+        //luna
+        g2.setColor(new Color(186, 193, 201));
+		g2.fillArc(10,60,200,200,0,360);
+
+	}
 	
 	
 	
