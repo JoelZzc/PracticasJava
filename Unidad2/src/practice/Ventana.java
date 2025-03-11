@@ -9,6 +9,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -44,7 +46,7 @@ public class Ventana extends JFrame{
 	    this.setIconImage(image);
     
 		
-		//this.add(this.Registro());
+		this.add(this.Registro());
 		//this.add(this.login());
 		//this.add(this.users());
 		//this.add(this.calculadoraLayouts());
@@ -88,7 +90,7 @@ public class Ventana extends JFrame{
 		panelFondo.setVisible(true);
 		panelFondo.setLocation(0,0);
 		panelFondo.setSize(1000,1000);
-		panelFondo.setBackground(Color.BLACK);
+		//panelFondo.setBackground(Color.BLACK);
 		panelFondo.setOpaque(true);
 		panelFondo.setLayout(null);
 		
@@ -123,7 +125,7 @@ public class Ventana extends JFrame{
 		
 		JTextField nombreUsuario = new JTextField();
 		nombreUsuario.setBounds(90, 100,300,30);
-		nombreUsuario.setText("Nombre de usuario..." );
+		//nombreUsuario.setText("Nombre de usuario..." );
 		panelLogin.add(nombreUsuario);
 		
 		JLabel contraseña = new JLabel("Contraseña ");
@@ -135,7 +137,7 @@ public class Ventana extends JFrame{
 		
 		JTextField contraseña2 = new JTextField();
 		contraseña2.setBounds(90, 190, 300,30);
-		contraseña2.setText("Contraseña..." );
+		//contraseña2.setText("Contraseña..." );
 		panelLogin.add(contraseña2);
 		
 		JLabel imagenLock = new JLabel(new ImageIcon("lock2.png"));
@@ -157,6 +159,28 @@ public class Ventana extends JFrame{
 		JButton iniciar = new JButton("Siguiente");
 		iniciar.setBounds(280,400,180,25);
 		iniciar.setFont(new Font("Arial",Font.BOLD,12));
+		iniciar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(nombreUsuario.getText().equals("")){
+					nombreUsuario.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}
+				else
+					nombreUsuario.setBorder(BorderFactory.createLineBorder(Color.green,2));
+			}
+		});	
+		iniciar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(contraseña2.getText().equals("")){
+					contraseña2.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}
+				else
+					contraseña2.setBorder(BorderFactory.createLineBorder(Color.green,2));
+			}
+		});
+		
+		
 		panelLogin.add(iniciar);
 		
 		JButton crearCuenta = new JButton("Crear cuenta");
@@ -176,6 +200,7 @@ public class Ventana extends JFrame{
 		panelRegistro.setVisible(true);
 		panelRegistro.setLocation(0,0);
 		panelRegistro.setSize(500,500);
+		panelRegistro.setBackground(new Color(128,0,128));
 		panelRegistro.setOpaque(true);
 		panelRegistro.setLayout(null);
 		
@@ -195,7 +220,7 @@ public class Ventana extends JFrame{
 		
 		JTextField nombreUsuario = new JTextField();
 		nombreUsuario.setBounds(230, 100, 230,25);
-		nombreUsuario.setText("Nombre de usuario..." );
+		//nombreUsuario.setText("Nombre de usuario..." );
 		panelRegistro.add(nombreUsuario);
 		
 		JLabel bio = new JLabel("BIO ");
@@ -206,7 +231,7 @@ public class Ventana extends JFrame{
 		
 		JTextField bio2 = new JTextField();
 		bio2.setBounds(230, 140, 230,50);
-		bio2.setText("BIO..." );
+		//bio2.setText("BIO..." );
 		panelRegistro.add(bio2);
 		
 		JLabel preferencias = new JLabel("Preferencias");
@@ -231,12 +256,7 @@ public class Ventana extends JFrame{
         términos1.setBounds(30,300,180,25);
         términos1.setFont(new Font("Arial",Font.BOLD,15));
         panelRegistro.add(términos1);
-			
-		JButton crearCuenta = new JButton("Crear cuenta");
-		crearCuenta.setBounds(150,430,180,25);
-		crearCuenta.setFont(new Font("Arial",Font.BOLD,12));
-		panelRegistro.add(crearCuenta);
-		
+					
 		String [] colonias_dataset= {"centro", "Villas del encanto", "pedregal", "Agua escondida","Balandra", "Camino real"};
 		JComboBox colonias = new JComboBox(colonias_dataset);
 		colonias.setBounds(30, 380, 180, 25);
@@ -254,6 +274,43 @@ public class Ventana extends JFrame{
 		
 		terminos.add(terms1);
 		terminos.add(terms2);
+
+		JButton crearCuenta = new JButton("Crear cuenta");
+		crearCuenta.setBounds(150,430,180,25);
+		crearCuenta.setFont(new Font("Arial",Font.BOLD,12));
+		crearCuenta.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(nombreUsuario.getText().equals("")){
+					nombreUsuario.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}
+				else
+					nombreUsuario.setBorder(BorderFactory.createLineBorder(Color.green,2));
+			}
+		});
+		crearCuenta.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(bio2.getText().equals("")){
+					bio2.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}
+				else
+					bio2.setBorder(BorderFactory.createLineBorder(Color.green,2));
+			}
+		});
+		crearCuenta.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				terms1.setBorderPainted(true);;
+				if(terms1.getText().equals("")){
+					terms1.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}
+				else
+					terms1.setBorder(BorderFactory.createLineBorder(Color.green,2));
+			}
+		});	
+		panelRegistro.add(crearCuenta);
 
 				
 		return panelRegistro;
@@ -674,7 +731,7 @@ public class Ventana extends JFrame{
 
 	}*/
 	
-	//Super mario 
+	//Mario Bros
 	/*
 	public void paint(Graphics g) {
 		super.paint(g);
@@ -748,7 +805,8 @@ public class Ventana extends JFrame{
 
 	}*/
 	
-	//ESCENA DE MARIO v2
+	//ESCENA DE SUPER MARIO WORLD
+	/*
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2= (Graphics2D) g;
@@ -951,8 +1009,12 @@ public class Ventana extends JFrame{
         g2.fillOval(960, 300, 40, 60);  // sombras ovaladas
         g2.fillOval(1050, 190, 40, 60);  // sombras ovaladas
         
+        ImageIcon img = new ImageIcon("planta2.png");
+		Image imagen=img.getImage();		
+		g2.drawImage(imagen, 825, 360, 90, 100, null);
         
-	}
+        
+	}*/
 	
 	
 }
