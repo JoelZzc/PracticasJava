@@ -65,10 +65,36 @@ public class Ventana extends JFrame{
 		JMenuItem op_nuevo= new JMenuItem("Nuevo");
 		JMenuItem op_guardar= new JMenuItem("Guardar");
 		JMenuItem op_cerrar= new JMenuItem("Cerrar");
+		
+
 		menu1.add(op_abrir);
 		menu1.add(op_nuevo);
 		menu1.add(op_guardar);
 		menu1.add(op_cerrar);
+		
+		JMenu menu4 = new JMenu("Cuenta");
+		JMenuItem ir_login= new JMenuItem("login");
+		ir_login.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				manager("login");
+
+			}
+		});
+		
+		JMenuItem ir_registro= new JMenuItem("registro");
+		ir_registro.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				manager("register");
+
+			}
+		});
+		
+		menu4.add(ir_login);
+		menu4.add(ir_registro);
 		
 		JMenu menu2 = new JMenu("Ayuda");
 		JRadioButtonMenuItem op_help= new JRadioButtonMenuItem("Manual de usuario");
@@ -77,6 +103,7 @@ public class Ventana extends JFrame{
 		menu2.add(op_soporte);
 		
 		barra.add(menu1);
+		barra.add(menu4);
 		barra.add(menu2);
 		
 		this.setJMenuBar(barra);
@@ -127,7 +154,6 @@ public class Ventana extends JFrame{
 		
 		JTextField nombreUsuario = new JTextField();
 		nombreUsuario.setBounds(90, 100,300,30);
-		//nombreUsuario.setText("Nombre de usuario..." );
 		panelLogin.add(nombreUsuario);
 		
 		JLabel contraseña = new JLabel("Contraseña ");
@@ -139,7 +165,6 @@ public class Ventana extends JFrame{
 		
 		JTextField contraseña2 = new JTextField();
 		contraseña2.setBounds(90, 190, 300,30);
-		//contraseña2.setText("Contraseña..." );
 		panelLogin.add(contraseña2);
 		
 		JLabel imagenLock = new JLabel(new ImageIcon("lock2.png"));
@@ -198,16 +223,22 @@ public class Ventana extends JFrame{
 				}
 			}
 		});	
-		
-		
 		panelLogin.add(iniciar);
 		
-		JButton crearCuenta = new JButton("Crear cuenta");
-		crearCuenta.setBounds(30,400,180,25);
-		crearCuenta.setFont(new Font("Arial",Font.BOLD,12));
-		panelLogin.add(crearCuenta);
+		JButton ir_al_registro = new JButton ("¿Aún no tienes cuenta?");
+		ir_al_registro.setSize(180,25);
+		ir_al_registro.setLocation(30, 400);
+		ir_al_registro.setFont(new Font("Arial",Font.BOLD,12));		
+		ir_al_registro.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				manager("register");
+				
+			}
+		});
 		
-		
+		panelLogin.add(ir_al_registro);
 		this.repaint();
 		
 		return panelFondo;
@@ -330,6 +361,21 @@ public class Ventana extends JFrame{
 			}
 		});	
 		panelRegistro.add(crearCuenta);
+		
+		JButton ir_al_login = new JButton ("Regresar al login");
+		ir_al_login.setSize(180,25);
+		ir_al_login.setLocation(280, 460);
+		ir_al_login.setFont(new Font("Arial",Font.BOLD,12));		
+		ir_al_login.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				manager("login");
+				
+			}
+		});
+		
+		panelRegistro.add(ir_al_login);
 
 				
 		return panelRegistro;
@@ -627,7 +673,22 @@ public class Ventana extends JFrame{
 		return panelFondo;
 	}
 	
-	
+	public void manager(String target) {
+		
+		this.getContentPane().removeAll();
+		
+		if(target.equals("register")) {
+			this.add(this.Registro());
+		}
+		if(target.equals("login")) {
+			this.add(this.login());
+		}
+		
+		this.repaint();
+		this.revalidate();
+		
+		
+	}
 	/*
 	public void paint(Graphics g) {
 		
@@ -1030,10 +1091,16 @@ public class Ventana extends JFrame{
         
         ImageIcon img = new ImageIcon("planta2.png");
 		Image imagen=img.getImage();		
-		g2.drawImage(imagen, 825, 360, 90, 100, null);
+		g2.drawImage(imagen, 825, 390, 90, 100, null);
+		
+		ImageIcon img_mario = new ImageIcon("mario.png");
+		Image imagen_mario=img_mario.getImage();		
+		g2.drawImage(imagen_mario, 225, 600, 80, 100, null);
         
         
 	}*/
+	
+	
 	
 	
 }
