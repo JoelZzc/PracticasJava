@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
@@ -44,10 +45,11 @@ public class Ventana extends JFrame{
 		ImageIcon imageIcon = new ImageIcon("website.png");
 		Image image=imageIcon.getImage();
 	    this.setIconImage(image);
+	    
     
 		
-		this.add(this.Registro());
-		//this.add(this.login());
+		//this.add(this.Registro());
+		this.add(this.login());
 		//this.add(this.users());
 		//this.add(this.calculadoraLayouts());
 		//this.add(this.interfaz());
@@ -162,23 +164,40 @@ public class Ventana extends JFrame{
 		iniciar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Boolean flag1=false,flag2=false;
+				
+				
 				if(nombreUsuario.getText().equals("")){
 					nombreUsuario.setBorder(BorderFactory.createLineBorder(Color.red,2));
 				}
-				else
+				else {
 					nombreUsuario.setBorder(BorderFactory.createLineBorder(Color.green,2));
-			}
-		});	
-		iniciar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+					flag1=true;
+				}
+					
 				if(contraseña2.getText().equals("")){
 					contraseña2.setBorder(BorderFactory.createLineBorder(Color.red,2));
 				}
-				else
+				else {
 					contraseña2.setBorder(BorderFactory.createLineBorder(Color.green,2));
+					flag2=true;
+				}
+				
+				if (flag1 && flag2) {
+					if(nombreUsuario.getText().equals("joel12@gmail.com")) {
+						if(contraseña2.getText().equals("1234")) {
+							JOptionPane.showMessageDialog(panelLogin, "Bienvenido");
+						}else {
+							JOptionPane.showMessageDialog(panelLogin, "Error");
+
+						}
+					}else {
+						JOptionPane.showMessageDialog(panelLogin, "Error");
+
+					}
+				}
 			}
-		});
+		});	
 		
 		
 		panelLogin.add(iniciar);
