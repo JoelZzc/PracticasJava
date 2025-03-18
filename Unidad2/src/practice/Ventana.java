@@ -30,7 +30,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class Ventana extends JFrame{
 	
@@ -47,7 +49,6 @@ public class Ventana extends JFrame{
 	    this.setIconImage(image);
 	    
     
-		
 		//this.add(this.Registro());
 		this.add(this.login());
 		//this.add(this.users());
@@ -314,6 +315,7 @@ public class Ventana extends JFrame{
 				
 			}
 		});
+		
 		
 		panelLogin.add(ir_al_registro);
 		this.repaint();
@@ -789,151 +791,537 @@ public class Ventana extends JFrame{
 	}
 	
 	public JPanel recuperacionCuenta() {
-		JPanel panel_recuperacion_cuenta= new JPanel();
-		panel_recuperacion_cuenta.setVisible(true);
-		panel_recuperacion_cuenta.setLocation(0,0);
-		panel_recuperacion_cuenta.setSize(500,500);
-		panel_recuperacion_cuenta.setBackground(new Color(128,0,128));
-		panel_recuperacion_cuenta.setOpaque(true);
-		panel_recuperacion_cuenta.setLayout(null);
+		JPanel contentPane;
+		JTextField textField;
+		JTextField textField_1;
+		JTextField textField_2;
 		
-		JLabel title = new JLabel("Recupera tu cuenta");
-		title.setSize(300,40);
-		title.setLocation(160,10);
-		title.setFont(new Font("Arial",Font.BOLD,25));
-		title.setForeground(Color.WHITE);
-		title.setHorizontalAlignment(JLabel.CENTER);
-		panel_recuperacion_cuenta.add(title);
+		setBackground(new Color(255, 255, 255));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 999, 699);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 202, 255));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
 		
-		return panel_recuperacion_cuenta;
+		JLabel lblNewLabel = new JLabel("Recuperar tu cuenta");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		lblNewLabel.setBounds(113, 43, 245, 49);
+		contentPane.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBorder(BorderFactory.createTitledBorder("Correo o numero celular"));
+		textField.setBounds(113, 155, 196, 34);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBorder(BorderFactory.createTitledBorder("Nombre"));
+		textField_1.setColumns(10);
+		textField_1.setBounds(113, 225, 196, 34);
+		contentPane.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setBorder(BorderFactory.createTitledBorder("Apellidos"));
+		textField_2.setColumns(10);
+		textField_2.setBounds(113, 290, 196, 34);
+		contentPane.add(textField_2);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnVolver.setBounds(60, 373, 141, 34);
+		btnVolver.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				manager("login");
+				
+			}
+		});
+		contentPane.add(btnVolver);
+		
+		JButton btnNewButton_1_1 = new JButton("Siguiente");
+		btnNewButton_1_1.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnNewButton_1_1.setBounds(217, 373, 141, 34);
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {				
+				
+				if(textField.getText().equals("")){
+					textField.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}
+				else {
+					textField.setBorder(BorderFactory.createLineBorder(Color.green,2));
+				}
+					
+				if(textField_1.getText().equals("")){
+					textField_1.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}
+				else {
+					textField_1.setBorder(BorderFactory.createLineBorder(Color.green,2));
+				}
+				if(textField_2.getText().equals("")){
+					textField_2.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}
+				else {
+					textField_2.setBorder(BorderFactory.createLineBorder(Color.green,2));
+				}
+			}
+		});	
+		contentPane.add(btnNewButton_1_1);
+		
+		return contentPane;
 		
 	}
 	
 	public JPanel darAlta() {
-		JPanel panel_alta= new JPanel();
-		panel_alta.setVisible(true);
-		panel_alta.setLocation(0,0);
-		panel_alta.setSize(500,500);
-		panel_alta.setBackground(new Color(128,0,128));
-		panel_alta.setOpaque(true);
-		panel_alta.setLayout(null);
+		JPanel contentPane;
+		JTextField textField;
+		JTextField textField_1;
+		JTextField textField_2;
 		
-		JLabel title = new JLabel("Dar de alta tu cuenta");
-		title.setSize(300,40);
-		title.setLocation(160,10);
-		title.setFont(new Font("Arial",Font.BOLD,25));
-		title.setForeground(Color.WHITE);
-		title.setHorizontalAlignment(JLabel.CENTER);
-		panel_alta.add(title);
+		setBackground(new Color(255, 255, 255));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 999, 699);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 202, 255));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
 		
-		return panel_alta;
+		JLabel lblNewLabel = new JLabel("Dar de alta");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		lblNewLabel.setBounds(113, 43, 245, 49);
+		contentPane.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBorder(BorderFactory.createTitledBorder("Nombre de usuario"));
+		textField.setBounds(113, 155, 196, 34);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBorder(BorderFactory.createTitledBorder("Contraseña"));
+		textField_1.setColumns(10);
+		textField_1.setBounds(113, 225, 196, 34);
+		contentPane.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setBorder(BorderFactory.createTitledBorder("Confimar contraseña"));
+		textField_2.setColumns(10);
+		textField_2.setBounds(113, 290, 196, 34);
+		contentPane.add(textField_2);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnVolver.setBounds(60, 373, 141, 34);
+		btnVolver.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				manager("login");
+				
+			}
+		});
+		contentPane.add(btnVolver);
+		
+		JButton btnNewButton_1_1 = new JButton("Siguiente");
+		btnNewButton_1_1.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnNewButton_1_1.setBounds(217, 373, 141, 34);
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {				
+				
+				if(textField.getText().equals("")){
+					textField.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}
+				else {
+					textField.setBorder(BorderFactory.createLineBorder(Color.green,2));
+				}
+					
+				if(textField_1.getText().equals("")){
+					textField_1.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}
+				else {
+					textField_1.setBorder(BorderFactory.createLineBorder(Color.green,2));
+				}
+				if(textField_2.getText().equals("")){
+					textField_2.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}
+				else {
+					textField_2.setBorder(BorderFactory.createLineBorder(Color.green,2));
+				}
+			}
+		});	
+		contentPane.add(btnNewButton_1_1);
+		
+		return contentPane;
 		
 	}
 	
 	public JPanel darBaja() {
-		JPanel panel_baja= new JPanel();
-		panel_baja.setVisible(true);
-		panel_baja.setLocation(0,0);
-		panel_baja.setSize(500,500);
-		panel_baja.setBackground(new Color(128,0,128));
-		panel_baja.setOpaque(true);
-		panel_baja.setLayout(null);
+		JPanel contentPane;
+		JTextField textField_1;
+
 		
-		JLabel title = new JLabel("Dar de baja tu cuenta");
-		title.setSize(300,40);
-		title.setLocation(160,10);
-		title.setFont(new Font("Arial",Font.BOLD,25));
-		title.setForeground(Color.WHITE);
-		title.setHorizontalAlignment(JLabel.CENTER);
-		panel_baja.add(title);
+		setBackground(new Color(255, 255, 255));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 999, 699);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 202, 255));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
 		
-		return panel_baja;
+		JLabel lblNewLabel = new JLabel("Dar de baja");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		lblNewLabel.setBounds(113, 43, 245, 49);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("¿Estas seguro de eliminar tu cuenta?");
+		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblNewLabel_1.setBounds(53, 132, 251, 17);
+		contentPane.add(lblNewLabel_1);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Si");
+		chckbxNewCheckBox.setFont(new Font("Arial", Font.PLAIN, 12));
+		chckbxNewCheckBox.setBounds(59, 165, 93, 21);
+		contentPane.add(chckbxNewCheckBox);
+		
+		textField_1 = new JTextField();
+		textField_1.setBorder(BorderFactory.createTitledBorder("Contraseña"));
+		textField_1.setColumns(10);
+		textField_1.setBounds(59, 225, 196, 34);
+		contentPane.add(textField_1);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnVolver.setBounds(60, 373, 141, 34);
+		btnVolver.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				manager("login");
+				
+			}
+		});
+		contentPane.add(btnVolver);
+		
+		JButton btnNewButton_1_1 = new JButton("Siguiente");
+		btnNewButton_1_1.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnNewButton_1_1.setBounds(217, 373, 141, 34);
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {				
+					
+				if(textField_1.getText().equals("")){
+					textField_1.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}
+				else {
+					textField_1.setBorder(BorderFactory.createLineBorder(Color.green,2));
+				}
+			}
+		});	
+		contentPane.add(btnNewButton_1_1);
+		
+		return contentPane;
 		
 	}
 	
 	public JPanel consultar_cuenta() {
-		JPanel panel_consultar= new JPanel();
-		panel_consultar.setVisible(true);
-		panel_consultar.setLocation(0,0);
-		panel_consultar.setSize(500,500);
-		panel_consultar.setBackground(new Color(128,0,128));
-		panel_consultar.setOpaque(true);
-		panel_consultar.setLayout(null);
+		JPanel contentPane;
 		
-		JLabel title = new JLabel("Detalles de tu cuenta");
-		title.setSize(300,40);
-		title.setLocation(160,10);
-		title.setFont(new Font("Arial",Font.BOLD,25));
-		title.setForeground(Color.WHITE);
-		title.setHorizontalAlignment(JLabel.CENTER);
-		panel_consultar.add(title);
+		setBackground(new Color(255, 255, 255));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 999, 699);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 202, 255));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
 		
-		return panel_consultar;
+		JLabel lblNewLabel = new JLabel("Informacion de la cuenta");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		lblNewLabel.setBounds(400, 43, 245, 49);
+		contentPane.add(lblNewLabel);
+		
+		JLabel text1 = new JLabel("Total de usuarios");
+		text1.setBounds(50, 70, 180, 40);
+		text1.setOpaque(true);
+		text1.setFont(new Font("Arial",Font.BOLD,14));
+		text1.setHorizontalAlignment(JLabel.CENTER);
+		contentPane.add(text1);
+		
+		JLabel text2 = new JLabel("90");
+		text2.setBounds(50, 100, 180, 40);
+		text2.setOpaque(true);
+		text2.setFont(new Font("Arial",Font.BOLD,14));
+		text2.setHorizontalAlignment(JLabel.CENTER);
+		contentPane.add(text2);
+		
+		JLabel widget = new JLabel();
+		widget.setBounds(30, 60, 220, 100);
+		widget.setOpaque(true);
+		widget.setBorder(BorderFactory.createLineBorder(Color.black,2));
+		contentPane.add(widget);
+		
+		JButton export = new JButton("Exportar");
+		export.setBounds(840, 140, 120, 40);
+		export.setBorder(BorderFactory.createLineBorder(Color.black,2));
+		contentPane.add(export);
+		
+		JButton add = new JButton("Volver");
+		add.setBounds(700, 140, 120, 40);
+		add.setBorder(BorderFactory.createLineBorder(Color.black,2));
+		add.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				manager("login");
+				
+			}
+		});
+		
+		contentPane.add(add);
+		
+		
+		String[] columnNames= {
+				"Nombre",
+				"Apellido paterno",
+				"Apellido materno",
+				"Año nacimiento",
+				"Inscrito",
+		};
+		
+		Object[][]data= {
+				{"Joel","Zazueta", "Carrillo", 2005, true},
+				{"Lhucas", "Huml", "Patinar",1999,true},
+				{"Kathya", "Walrath", "Escalar", 2000,false},
+				{"Marcus", "Andrews", "Correr",1997,true},
+				{"Angela", "Lalth", "Nadar",1999,false},
+				{"Joel","Zazueta", "Carrillo", 2005, true},
+				{"Lhucas", "Huml", "Patinar",1999,true},
+				{"Kathya", "Walrath", "Escalar", 2000,false},
+				{"Marcus", "Andrews", "Correr",1997,true},
+				{"Angela", "Lalth", "Nadar",1999,false},
+				{"Joel","Zazueta", "Carrillo", 2005, true},
+				{"Lhucas", "Huml", "Patinar",1999,true},
+				{"Kathya", "Walrath", "Escalar", 2000,false},
+				{"Marcus", "Andrews", "Correr",1997,true},
+				{"Angela", "Lalth", "Nadar",1999,false}
+		};		
+		
+		JTable table = new JTable(data,columnNames);
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(30, 200, 930, 200);
+		contentPane.add(scrollPane);
+
+		
+		contentPane.revalidate();
+		
+		return contentPane;
 		
 	}
 	
 	public JPanel ayuda_crea_usuario() {
-		JPanel panel_consultar= new JPanel();
-		panel_consultar.setVisible(true);
-		panel_consultar.setLocation(0,0);
-		panel_consultar.setSize(500,500);
-		panel_consultar.setBackground(new Color(128,0,128));
-		panel_consultar.setOpaque(true);
-		panel_consultar.setLayout(null);
+		JPanel contentPane;
+		JTextField textField;
+		JTextField textField_1;
+		JTextField textField_2;
 		
-		JLabel title = new JLabel("Como crear un usuario");
-		title.setSize(300,40);
-		title.setLocation(160,10);
-		title.setFont(new Font("Arial",Font.BOLD,25));
-		title.setForeground(Color.WHITE);
-		title.setHorizontalAlignment(JLabel.CENTER);
-		panel_consultar.add(title);
+		setBackground(new Color(255, 255, 255));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 999, 699);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 202, 255));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
 		
-		return panel_consultar;
+		JLabel lblNewLabel = new JLabel("¿Como crear tu cuenta?");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		lblNewLabel.setBounds(113, 43, 245, 49);
+		contentPane.add(lblNewLabel);
+		
+		JTextArea txtrParaPoderCrear = new JTextArea();
+		txtrParaPoderCrear.setText("Para poder crear una cuenta es necesesario que \r\ningreses tus datos en los siguientes campos");
+		txtrParaPoderCrear.setBounds(67, 98, 301, 49);
+		txtrParaPoderCrear.setBackground(new Color(255, 202, 255));
+		contentPane.add(txtrParaPoderCrear);
+		
+		textField = new JTextField();
+		textField.setBorder(BorderFactory.createTitledBorder("Correo"));
+		textField.setBounds(113, 155, 196, 34);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBorder(BorderFactory.createTitledBorder("Contraseña"));
+		textField_1.setColumns(10);
+		textField_1.setBounds(113, 225, 196, 34);
+		contentPane.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setBorder(BorderFactory.createTitledBorder("Confimar contraseña"));
+		textField_2.setColumns(10);
+		textField_2.setBounds(113, 290, 196, 34);
+		contentPane.add(textField_2);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnVolver.setBounds(60, 373, 141, 34);
+		btnVolver.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				manager("login");
+				
+			}
+		});
+		contentPane.add(btnVolver);
+		
+		JButton btnNewButton_1_1 = new JButton("Siguiente");
+		btnNewButton_1_1.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnNewButton_1_1.setBounds(217, 373, 141, 34);
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {				
+				manager("register");
+			}
+		});	
+		contentPane.add(btnNewButton_1_1);
+		
+		return contentPane;
 		
 	}
 	
 	public JPanel ayuda_accede_sistema() {
-		JPanel panel_consultar= new JPanel();
-		panel_consultar.setVisible(true);
-		panel_consultar.setLocation(0,0);
-		panel_consultar.setSize(500,500);
-		panel_consultar.setBackground(new Color(128,0,128));
-		panel_consultar.setOpaque(true);
-		panel_consultar.setLayout(null);
+		JPanel contentPane;
+		JTextField textField;
+		JTextField textField_1;
+		JTextField textField_2;
 		
-		JLabel title = new JLabel("Como acceder al sistema");
-		title.setSize(300,40);
-		title.setLocation(160,10);
-		title.setFont(new Font("Arial",Font.BOLD,25));
-		title.setForeground(Color.WHITE);
-		title.setHorizontalAlignment(JLabel.CENTER);
-		panel_consultar.add(title);
+		setBackground(new Color(255, 255, 255));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 999, 699);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 202, 255));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
 		
-		return panel_consultar;
+		JLabel lblNewLabel = new JLabel("¿Como crear tu cuenta?");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		lblNewLabel.setBounds(113, 43, 245, 49);
+		contentPane.add(lblNewLabel);
+		
+		JTextArea txtrParaPoderCrear = new JTextArea();
+		txtrParaPoderCrear.setText("Para poder acceder al sistema es necesesario que primero \r\ningreses tus datos en los siguientes campos");
+		txtrParaPoderCrear.setBounds(67, 98, 301, 49);
+		txtrParaPoderCrear.setBackground(new Color(255, 202, 255));
+		contentPane.add(txtrParaPoderCrear);
+		
+		textField = new JTextField();
+		textField.setBorder(BorderFactory.createTitledBorder("Correo"));
+		textField.setBounds(113, 155, 196, 34);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBorder(BorderFactory.createTitledBorder("Contraseña"));
+		textField_1.setColumns(10);
+		textField_1.setBounds(113, 225, 196, 34);
+		contentPane.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setBorder(BorderFactory.createTitledBorder("Confimar contraseña"));
+		textField_2.setColumns(10);
+		textField_2.setBounds(113, 290, 196, 34);
+		contentPane.add(textField_2);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnVolver.setBounds(60, 373, 141, 34);
+		btnVolver.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				manager("login");
+				
+			}
+		});
+		contentPane.add(btnVolver);
+		
+		JButton btnNewButton_1_1 = new JButton("Siguiente");
+		btnNewButton_1_1.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnNewButton_1_1.setBounds(217, 373, 141, 34);
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {				
+				manager("register");
+			}
+		});	
+		contentPane.add(btnNewButton_1_1);
+		
+		return contentPane;
 		
 	}
 	
 	public JPanel ayuda_recupera_contraseña() {
-		JPanel panel_consultar= new JPanel();
-		panel_consultar.setVisible(true);
-		panel_consultar.setLocation(0,0);
-		panel_consultar.setSize(500,500);
-		panel_consultar.setBackground(new Color(128,0,128));
-		panel_consultar.setOpaque(true);
-		panel_consultar.setLayout(null);
+		JPanel contentPane;
+		JTextField textField;
+		JTextField textField_1;
+		JTextField textField_2;
 		
-		JLabel title = new JLabel("Como recuperar tu contraseña");
-		title.setSize(400,40);
-		title.setLocation(160,10);
-		title.setFont(new Font("Arial",Font.BOLD,25));
-		title.setForeground(Color.WHITE);
-		title.setHorizontalAlignment(JLabel.CENTER);
-		panel_consultar.add(title);
+		setBackground(new Color(255, 255, 255));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 999, 699);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 202, 255));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
 		
-		return panel_consultar;
+		JLabel lblNewLabel = new JLabel("¿Como recuperar tu contraseña?");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		lblNewLabel.setBounds(113, 43, 345, 49);
+		contentPane.add(lblNewLabel);
+		
+		JTextArea txtrParaPoderCrear = new JTextArea();
+		txtrParaPoderCrear.setText("Para poder recuperar tu contraseña primero \r\ningreses tus datos en los siguientes campos");
+		txtrParaPoderCrear.setBounds(67, 98, 301, 49);
+		txtrParaPoderCrear.setBackground(new Color(255, 202, 255));
+		contentPane.add(txtrParaPoderCrear);
+		
+		textField = new JTextField();
+		textField.setBorder(BorderFactory.createTitledBorder("Correo o numero celular"));
+		textField.setBounds(113, 155, 196, 34);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnVolver.setBounds(60, 373, 141, 34);
+		btnVolver.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				manager("login");
+				
+			}
+		});
+		contentPane.add(btnVolver);
+		
+		JButton btnNewButton_1_1 = new JButton("Siguiente");
+		btnNewButton_1_1.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnNewButton_1_1.setBounds(217, 373, 141, 34);
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {				
+				manager("recuperacionCuenta");
+			}
+		});	
+		contentPane.add(btnNewButton_1_1);
+		
+		return contentPane;
 		
 	}
+	
+	
 	/*
 	public void paint(Graphics g) {
 		
