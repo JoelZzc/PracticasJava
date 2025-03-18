@@ -34,6 +34,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.metal.MetalButtonUI;
 
 public class Ventana extends JFrame{
 	
@@ -1327,25 +1328,34 @@ public class Ventana extends JFrame{
 		JPanel frame= new JPanel();
 		frame.setVisible(true);
 		frame.setLocation(0,0);
-		frame.setSize(500,500);
-		frame.setBackground(new Color(128,0,128));
+		frame.setSize(1000,650);
+		frame.setBackground(new Color(70, 190, 250));
 		frame.setOpaque(true);
 		frame.setLayout(null);
 		
 		JButton main_boton= new JButton("Click me");
 		main_boton.setSize(400,60);
-		main_boton.setLocation(260,300);
+		main_boton.setLocation(300,400);
 		main_boton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			       Random rand = new Random();
+			    Random rand = new Random();
 
 				JButton boton= new JButton("Click me");
+				boton.setBackground(new Color(rand.nextInt(250), rand.nextInt(250), rand.nextInt(250)));
 				boton.setSize(rand.nextInt(100),rand.nextInt(200));
 				boton.setLocation(rand.nextInt(1000),rand.nextInt(600));
-				frame.add(boton);
+				boton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(null,boton.getBackground());
+					}
+				});
 				
+				
+				
+				frame.add(boton);
 				frame.repaint();
 				
 			}
