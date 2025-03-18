@@ -12,6 +12,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -50,7 +51,8 @@ public class Ventana extends JFrame{
 	    
     
 		//this.add(this.Registro());
-		this.add(this.login());
+		//this.add(this.login());
+		this.add(this.boton());
 		//this.add(this.users());
 		//this.add(this.calculadoraLayouts());
 		//this.add(this.interfaz());
@@ -1321,7 +1323,38 @@ public class Ventana extends JFrame{
 		
 	}
 	
-	
+	public JPanel boton() {
+		JPanel frame= new JPanel();
+		frame.setVisible(true);
+		frame.setLocation(0,0);
+		frame.setSize(500,500);
+		frame.setBackground(new Color(128,0,128));
+		frame.setOpaque(true);
+		frame.setLayout(null);
+		
+		JButton main_boton= new JButton("Click me");
+		main_boton.setSize(400,60);
+		main_boton.setLocation(260,300);
+		main_boton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			       Random rand = new Random();
+
+				JButton boton= new JButton("Click me");
+				boton.setSize(rand.nextInt(100),rand.nextInt(200));
+				boton.setLocation(rand.nextInt(1000),rand.nextInt(600));
+				frame.add(boton);
+				
+				frame.repaint();
+				
+			}
+		});
+		frame.add(main_boton);
+		
+		
+		return frame;
+	}
 	/*
 	public void paint(Graphics g) {
 		
