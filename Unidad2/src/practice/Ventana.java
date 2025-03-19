@@ -1328,7 +1328,7 @@ public class Ventana extends JFrame{
 		JPanel frame= new JPanel();
 		frame.setVisible(true);
 		frame.setLocation(0,0);
-		frame.setSize(1000,650);
+		frame.setSize(this.WIDTH,this.HEIGHT);
 		frame.setBackground(new Color(70, 190, 250));
 		frame.setOpaque(true);
 		frame.setLayout(null);
@@ -1348,9 +1348,12 @@ public class Ventana extends JFrame{
 				boton.setLocation(rand.nextInt(1000),rand.nextInt(600));
 				boton.addActionListener(new ActionListener() {
 					@Override
-					public void actionPerformed(ActionEvent e) {
-						JOptionPane.showMessageDialog(null,boton.getBackground());
+					public void actionPerformed(ActionEvent e) {						
+						if (JOptionPane.showConfirmDialog(null, e.getSource().hashCode(),"Borrar",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+							frame.remove(boton);
+							frame.repaint();
 					}
+					
 				});
 				
 				
