@@ -127,7 +127,7 @@ public class Tictactoe extends JFrame {
 				}
 			}
 		});
-		panel.add(btnNewButton_1);
+		panel.add(btnNewButton_1); //7
 		
 		btnNewButton = new JButton("   ");
 		btnNewButton.addActionListener(new ActionListener() {
