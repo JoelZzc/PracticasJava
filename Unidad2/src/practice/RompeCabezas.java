@@ -10,12 +10,22 @@ import javax.swing.border.LineBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.Collections;
+
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RompeCabezas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	ArrayList<Integer> numeros= new ArrayList<Integer>();
+	public int[][]tablero= {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
+	private JButton[][] botones = new JButton[4][4];
 
 	/**
 	 * Launch the application.
@@ -36,100 +46,101 @@ public class RompeCabezas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RompeCabezas() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 731, 568);
-		contentPane = new JPanel();
-		contentPane.setBackground(Color.decode("#e7c294"));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    public RompeCabezas() {
+        numeros.add(1);
+        numeros.add(2);
+        numeros.add(3);
+        numeros.add(4);
+        numeros.add(5);
+        numeros.add(6);
+        numeros.add(7);
+        numeros.add(8);
+        numeros.add(9);
+        numeros.add(10);
+        numeros.add(11);
+        numeros.add(12);
+        numeros.add(13);
+        numeros.add(14);
+        numeros.add(15);
+        numeros.add(0);
 
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setBackground(Color.decode("#e7c294"));
-		panel.setLayout(new GridLayout(4, 4, 0, 0));
-		
-		JButton btnNewButton_1 = new JButton("1");
-		btnNewButton_1.setBorder(new LineBorder(Color.decode("#e7c294")));
-		panel.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("2");
-		btnNewButton_2.setBorder(new LineBorder(Color.decode("#e7c294")));
-		panel.add(btnNewButton_2);
-		
-		JButton btnNewButton_4 = new JButton("3");
-		btnNewButton_4.setBorder(new LineBorder(Color.decode("#e7c294")));
-		panel.add(btnNewButton_4);
-		
-		JButton btnNewButton_12 = new JButton("4");
-		btnNewButton_12.setBorder(new LineBorder(Color.decode("#e7c294")));
-		panel.add(btnNewButton_12);
-		
-		JButton btnNewButton = new JButton("5");
-		btnNewButton.setBorder(new LineBorder(Color.decode("#e7c294")));
-		panel.add(btnNewButton);
-		
-		JButton btnNewButton_6 = new JButton("6");
-		btnNewButton_6.setBorder(new LineBorder(Color.decode("#e7c294")));
+        Collections.shuffle(numeros);
+        int k = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                tablero[i][j] = numeros.get(k);
+                k++;
+            }
+        }
 
-		panel.add(btnNewButton_6);
-		
-		JButton btnNewButton_3 = new JButton("7");
-		btnNewButton_3.setBorder(new LineBorder(Color.decode("#e7c294")));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 731, 568);
+        contentPane = new JPanel();
+        contentPane.setBackground(Color.decode("#e7c294"));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		panel.add(btnNewButton_3);
-		
-		JButton btnNewButton_5 = new JButton("8");
-		btnNewButton_5.setBorder(new LineBorder(Color.decode("#e7c294")));
+        setContentPane(contentPane);
+        contentPane.setLayout(new BorderLayout(0, 0));
 
-		panel.add(btnNewButton_5);
-		
-		JButton btnNewButton_9 = new JButton("9");
-		btnNewButton_9.setBorder(new LineBorder(Color.decode("#e7c294")));
+        JPanel panel = new JPanel();
+        contentPane.add(panel, BorderLayout.CENTER);
+        panel.setBackground(Color.decode("#e7c294"));
+        panel.setLayout(new GridLayout(4, 4, 0, 0));
 
-		panel.add(btnNewButton_9);
-		
-		JButton btnNewButton_8 = new JButton("10");
-		btnNewButton_8.setBorder(new LineBorder(Color.decode("#e7c294")));
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                int x = i;
+                int y = j;
+                botones[i][j] = new JButton(tablero[i][j] == 0 ? "" : Integer.toString(tablero[i][j]));
+                botones[i][j].setBorder(new LineBorder(Color.decode("#e7c294")));
+                botones[i][j].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        mover(x, y);
+                    }
+                });
+                panel.add(botones[i][j]);
+            }
+        }
 
-		panel.add(btnNewButton_8);
-		
-		JButton btnNewButton_7 = new JButton("11");
-		btnNewButton_7.setBorder(new LineBorder(Color.decode("#e7c294")));
+        JPanel panel_1 = new JPanel();
+        panel_1.setBackground(Color.decode("#e7c294"));
+        contentPane.add(panel_1, BorderLayout.SOUTH);
 
-		panel.add(btnNewButton_7);
-		
-		JButton btnNewButton_10 = new JButton("12");
-		btnNewButton_10.setBorder(new LineBorder(Color.decode("#e7c294")));
+        JButton btnNewButton_16 = new JButton("Reiniciar");
+        panel_1.add(btnNewButton_16);
 
-		panel.add(btnNewButton_10);
-		
-		JButton btnNewButton_11 = new JButton("13");
-		btnNewButton_11.setBorder(new LineBorder(Color.decode("#e7c294")));
+        JPanel panel_2 = new JPanel();
+        panel_2.setBackground(Color.decode("#e7c294"));
+        contentPane.add(panel_2, BorderLayout.NORTH);
 
-		panel.add(btnNewButton_11);
-		
-		JButton btnNewButton_13 = new JButton("14");
-		btnNewButton_13.setBorder(new LineBorder(Color.decode("#e7c294")));
+        JLabel lblNewLabel = new JLabel("Rompe Cabezas");
+        lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        panel_2.add(lblNewLabel);
+    }
 
-		panel.add(btnNewButton_13);
-		
-		JButton btnNewButton_14 = new JButton("15");
-		btnNewButton_14.setBorder(new LineBorder(Color.decode("#e7c294")));
-		panel.add(btnNewButton_14);
-		
-		JButton btnNewButton_15 = new JButton("");
-		btnNewButton_15.setBorder(new LineBorder(Color.decode("#e7c294")));
-		panel.add(btnNewButton_15);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.decode("#e7c294"));
-		contentPane.add(panel_1, BorderLayout.SOUTH);
-		
-		JButton btnNewButton_16 = new JButton("Reiniciar");
-		panel_1.add(btnNewButton_16);
-	}
+    public void mover(int x, int y) {
+        if (tablero[x][y] == 0) {
+            return;
+        }
 
+        if (x > 0 && tablero[x - 1][y] == 0) {
+            intercambiar(x, y, x - 1, y); // Mover arriba
+        } else if (x < 3 && tablero[x + 1][y] == 0) {
+            intercambiar(x, y, x + 1, y); // Mover abajo
+        } else if (y > 0 && tablero[x][y - 1] == 0) {
+            intercambiar(x, y, x, y - 1); // Mover izquierda
+        } else if (y < 3 && tablero[x][y + 1] == 0) {
+            intercambiar(x, y, x, y + 1); // Mover derecha
+        }
+    }
+
+    public void intercambiar(int x1, int y1, int x2, int y2) {
+        int bk = tablero[x1][y1];
+        tablero[x1][y1] = tablero[x2][y2];
+        tablero[x2][y2] = bk;
+
+        botones[x1][y1].setText(tablero[x1][y1] == 0 ? "" : Integer.toString(tablero[x1][y1]));
+        botones[x2][y2].setText(tablero[x2][y2] == 0 ? "" : Integer.toString(tablero[x2][y2]));
+    }
 }
+
