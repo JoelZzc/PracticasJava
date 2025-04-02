@@ -132,6 +132,12 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 		panel.add(btnBrush);
 		
 		JButton btnEraser = new JButton("Eraser");
+		btnEraser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tool=5;
+				color="#fefefe";
+			}
+		});
 		btnEraser.setIcon(new ImageIcon(PaintJava.class.getResource("/practice/herramienta-de-borrador.png")));
 		btnEraser.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnEraser.setBounds(42, 249, 113, 27);
@@ -231,6 +237,15 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 		panel.add(btnCircle_1_5);
 		
 		JButton btnNewButton_1 = new JButton("Clear canvas");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				puntos.clear();
+				figuras.clear();
+				listaDePuntos.clear();
+				panel_2.repaint();
+
+			}
+		});
 		btnNewButton_1.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnNewButton_1.setBounds(42, 443, 187, 27);
 		panel.add(btnNewButton_1);
@@ -296,6 +311,12 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 			puntos.add(e.getPoint());
 		}
 		
+		if(tool==5) {
+			panel_2.repaint();
+			figuras.add(new Figura(e.getX(),e.getY(),80,80,5,grosor,color));
+		}
+		panel_2.repaint();
+		
 	}
 
 	@Override
@@ -343,6 +364,42 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
  	       super.paintComponent(g);
  	       
  	       Graphics2D g2 = (Graphics2D) g; 
+ 	       
+ 	       for (Pincel pincel : listaDePuntos) {
+ 	    	   List<Point> trazo = pincel.puntos;
+ 	    	   int grosor= pincel.grosor; 
+ 	    	   String color=pincel.color;
+ 	    	   g2.setStroke(new BasicStroke(grosor));
+ 	    	   g2.setColor(Color.decode(color));
+ 	    	   if(trazo.size()>1) {
+ 	    		   
+ 	    		   for (int i = 1; i < trazo.size(); i++) {
+ 	    			   
+ 	    			   Point p1 = trazo.get(i-1);
+ 	    			   Point p2 = trazo.get(i);
+ 	    			   
+ 	    			   g2.drawLine(p1.x,p1.y,p2.x,p2.y);
+ 	    		   }
+ 	    		   
+ 	    	   }
+ 	    	   
+ 	       }
+ 	       
+ 	       for (Figura trazoFigura : figuras) {
+ 	    	   int grosor= trazoFigura.grosor; 
+ 	    	   String color=trazoFigura.color;
+ 	    	   g2.setStroke(new BasicStroke(grosor));
+ 	    	   g2.setColor(Color.decode(color));
+ 	    	   if(trazoFigura.type==2) {
+ 	    		   g2.drawRect(trazoFigura.x, trazoFigura.y, trazoFigura.w, trazoFigura.h);
+ 	    	   }else if(trazoFigura.type==3) {
+ 	    		   g2.drawOval(trazoFigura.x,trazoFigura.y, trazoFigura.w, trazoFigura.h);
+ 	    	   }else if(trazoFigura.type==4) {
+ 	    		   g2.drawLine(trazoFigura.x,trazoFigura.y, trazoFigura.w, trazoFigura.h);
+ 	    	   }
+ 	       }
+ 	       
+ 	       
  	       g2.setColor(Color.decode(color)); 
  	       g2.setStroke(new BasicStroke(grosor)); 
  		   
@@ -369,44 +426,13 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 		    			g2.drawOval(f.x,f.y, f.w, f.h);
 	    		   }else if(f.type==4) {
 		    			g2.drawLine(f.x,f.y, f.w, f.h);
+	    		   }else if(f.type==5) {
+		    			g2.clearRect(f.x,f.y, f.w, f.h);
 	    		   }
 	    	   }
 	    	   
 	       }
  	       
- 	       for (Pincel pincel : listaDePuntos) {
- 	    	   List<Point> trazo = pincel.puntos;
- 	    	   int grosor= pincel.grosor; 
- 	    	   String color=pincel.color;
- 	    	   g2.setStroke(new BasicStroke(grosor));
- 	    	   g2.setColor(Color.decode(color));
- 				if(trazo.size()>1) {
- 		    	   
- 		    	   for (int i = 1; i < trazo.size(); i++) {
- 		    		   
- 		    		   Point p1 = trazo.get(i-1);
- 		    		   Point p2 = trazo.get(i);
- 		    		   
- 		    		   g2.drawLine(p1.x,p1.y,p2.x,p2.y);
- 		    	   }
- 		    	   
- 		       }
-		
- 	       }
- 	       
- 	      for (Figura trazoFigura : figuras) {
-	    	   int grosor= trazoFigura.grosor; 
-	    	   String color=trazoFigura.color;
-	    	   g2.setStroke(new BasicStroke(grosor));
-	    	   g2.setColor(Color.decode(color));
-    		   if(trazoFigura.type==2) {
-    			   g2.drawRect(trazoFigura.x, trazoFigura.y, trazoFigura.w, trazoFigura.h);
-    		   }else if(trazoFigura.type==3) {
-	    			g2.drawOval(trazoFigura.x,trazoFigura.y, trazoFigura.w, trazoFigura.h);
-    		   }else if(trazoFigura.type==4) {
-	    			g2.drawLine(trazoFigura.x,trazoFigura.y, trazoFigura.w, trazoFigura.h);
-    		   }
-	       }
  
  	   }
  		
