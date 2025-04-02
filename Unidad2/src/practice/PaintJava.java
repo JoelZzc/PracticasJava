@@ -31,8 +31,10 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private PaintPanel panel_2;
+	private int tool=1;
+	private int grosor;
 	private ArrayList<Point> puntos = new ArrayList<Point>();
-	public int grosor;
+	private ArrayList<Figura> figuras = new ArrayList<Figura>();
 	public String color="#000000";
  	List<Pincel> listaDePuntos = new ArrayList<>(); 
 	/**
@@ -81,18 +83,33 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 		panel.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("Rectangle");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tool=2;
+			}
+		});
 		btnNewButton.setIcon(new ImageIcon(PaintJava.class.getResource("/practice/rectangulo.png")));
 		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnNewButton.setBounds(42, 53, 113, 27);
 		panel.add(btnNewButton);
 		
 		JButton btnCircle = new JButton("Circle  ");
+		btnCircle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tool=3;
+			}
+		});
 		btnCircle.setIcon(new ImageIcon(PaintJava.class.getResource("/practice/registro.png")));
 		btnCircle.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnCircle.setBounds(42, 92, 113, 27);
 		panel.add(btnCircle);
 		
 		JButton btnNewButton_1_1 = new JButton("  Triangle");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tool=4;
+			}
+		});
 		btnNewButton_1_1.setIcon(new ImageIcon(PaintJava.class.getResource("/practice/triangulo.png")));
 		btnNewButton_1_1.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnNewButton_1_1.setBounds(42, 129, 113, 27);
@@ -104,6 +121,11 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 		panel.add(lblOptions);
 		
 		JButton btnBrush = new JButton("Brush");
+		btnBrush.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tool=1;
+			}
+		});
 		btnBrush.setIcon(new ImageIcon(PaintJava.class.getResource("/practice/pincel-de-arte.png")));
 		btnBrush.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnBrush.setBounds(42, 212, 113, 27);
@@ -221,8 +243,17 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
+		if(tool==2) {
+			panel_2.repaint();
+			figuras.add(new Figura(e.getX(),e.getY(),80,80,2,grosor,color));
+		}else if(tool==3) {
+			panel_2.repaint();
+			figuras.add(new Figura(e.getX(),e.getY(),90,90,3,grosor,color));
+		}else if(tool==4) {
+			panel_2.repaint();
+			figuras.add(new Figura(e.getX(),e.getY(),90,90,4,grosor,color));
+		}
 	}
 
 	@Override
@@ -233,15 +264,17 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		
-		//Crea una copia de los puntos 
-		ArrayList ArrList2  = (ArrayList)puntos.clone();
- 		
- 		//se guarda en el historial de dibujos
- 		listaDePuntos.add(new Pincel(ArrList2,grosor,color));
-	
- 		//limpiamos el trazo actual
- 		puntos.clear();		
+		if(tool==1) {
+			//Crea una copia de los puntos 
+			ArrayList ArrList2  = (ArrayList)puntos.clone();
+			
+			//se guarda en el historial de dibujos
+			listaDePuntos.add(new Pincel(ArrList2,grosor,color));
+			
+			//limpiamos el trazo actual
+			puntos.clear();		
+			
+		}
 	}
 
 	@Override
@@ -258,16 +291,16 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
-		panel_2.repaint();
- 		
- 		puntos.add(e.getPoint());
+		if(tool==1) {
+			panel_2.repaint();
+			puntos.add(e.getPoint());
+		}
 		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
+		panel_2.repaint();
 		
 	}
 	
@@ -278,6 +311,21 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 		
 		public Pincel(List<Point>puntos, int grosor, String color) {
 			this.puntos=puntos;
+			this.grosor=grosor;
+			this.color=color;
+		}
+	}
+	
+	class Figura{
+		public int x,y,w,h,type,grosor;
+		String color;
+		
+		public Figura(int x , int y, int w, int h, int type,int grosor,String color) {
+			this.x=x;
+			this.y=y;
+			this.w=w;
+			this.h=h;
+			this.type=type;
 			this.grosor=grosor;
 			this.color=color;
 		}
@@ -310,7 +358,21 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
  	    		   g2.drawLine(p1.x,p1.y,p2.x,p2.y);
  	    	   }
  	    	   
- 	       }
+ 	       } 
+ 	       
+ 	       if(figuras.size()>0 ) {
+	    	   for (int i = 1; i < figuras.size(); i++) {
+	    		   Figura f = figuras.get(i);  
+	    		   if(f.type==2) {
+	    			   g2.drawRect(f.x, f.y, f.w, f.h);
+	    		   }else if(f.type==3) {
+		    			g2.drawOval(f.x,f.y, f.w, f.h);
+	    		   }else if(f.type==4) {
+		    			g2.drawLine(f.x,f.y, f.w, f.h);
+	    		   }
+	    	   }
+	    	   
+	       }
  	       
  	       for (Pincel pincel : listaDePuntos) {
  	    	   List<Point> trazo = pincel.puntos;
@@ -329,11 +391,23 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
  		    	   }
  		    	   
  		       }
- 			
+		
  	       }
  	       
- 	       
- 	       
+ 	      for (Figura trazoFigura : figuras) {
+	    	   int grosor= trazoFigura.grosor; 
+	    	   String color=trazoFigura.color;
+	    	   g2.setStroke(new BasicStroke(grosor));
+	    	   g2.setColor(Color.decode(color));
+    		   if(trazoFigura.type==2) {
+    			   g2.drawRect(trazoFigura.x, trazoFigura.y, trazoFigura.w, trazoFigura.h);
+    		   }else if(trazoFigura.type==3) {
+	    			g2.drawOval(trazoFigura.x,trazoFigura.y, trazoFigura.w, trazoFigura.h);
+    		   }else if(trazoFigura.type==4) {
+	    			g2.drawLine(trazoFigura.x,trazoFigura.y, trazoFigura.w, trazoFigura.h);
+    		   }
+	       }
+ 
  	   }
  		
  	}
