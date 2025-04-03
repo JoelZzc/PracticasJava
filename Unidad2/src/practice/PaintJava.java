@@ -32,11 +32,12 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 	private JPanel contentPane;
 	private PaintPanel panel_2;
 	private int tool=1;
+	private boolean fill=false;
 	private int grosor;
-	private ArrayList<Point> puntos = new ArrayList<Point>();
+	private ArrayList<Pincel> puntos = new ArrayList<Pincel>();
 	private ArrayList<Figura> figuras = new ArrayList<Figura>();
 	public String color="#000000";
- 	List<Pincel> listaDePuntos = new ArrayList<>(); 
+	List<List<Pincel>> listaDePuntos = new ArrayList<>(); 
 	/**
 	 * Launch the application.
 	 */
@@ -86,6 +87,7 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tool=2;
+				fill=false;
 			}
 		});
 		btnNewButton.setIcon(new ImageIcon(PaintJava.class.getResource("/practice/rectangulo.png")));
@@ -97,6 +99,8 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 		btnCircle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tool=3;
+				fill=false;
+
 			}
 		});
 		btnCircle.setIcon(new ImageIcon(PaintJava.class.getResource("/practice/registro.png")));
@@ -104,10 +108,12 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 		btnCircle.setBounds(42, 92, 113, 27);
 		panel.add(btnCircle);
 		
-		JButton btnNewButton_1_1 = new JButton("  Triangle");
+		JButton btnNewButton_1_1 = new JButton("  Line");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tool=4;
+				fill=false;
+
 			}
 		});
 		btnNewButton_1_1.setIcon(new ImageIcon(PaintJava.class.getResource("/practice/triangulo.png")));
@@ -144,6 +150,11 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 		panel.add(btnEraser);
 		
 		JButton btnFillColor = new JButton("Fill color");
+		btnFillColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fill=true;
+			}
+		});
 		btnFillColor.setIcon(new ImageIcon(PaintJava.class.getResource("/practice/rectangulo.png")));
 		btnFillColor.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnFillColor.setBounds(42, 286, 113, 27);
@@ -261,13 +272,13 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 		
 		if(tool==2) {
 			panel_2.repaint();
-			figuras.add(new Figura(e.getX(),e.getY(),80,80,2,grosor,color));
+			figuras.add(new Figura(e.getX(),e.getY(),80,80,2,grosor,color,fill));
 		}else if(tool==3) {
 			panel_2.repaint();
-			figuras.add(new Figura(e.getX(),e.getY(),90,90,3,grosor,color));
+			figuras.add(new Figura(e.getX(),e.getY(),90,90,3,grosor,color,fill));
 		}else if(tool==4) {
 			panel_2.repaint();
-			figuras.add(new Figura(e.getX(),e.getY(),90,90,4,grosor,color));
+			figuras.add(new Figura(e.getX(),e.getY(),90,90,4,grosor,color,fill));
 		}
 	}
 
@@ -284,7 +295,7 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 			ArrayList ArrList2  = (ArrayList)puntos.clone();
 			
 			//se guarda en el historial de dibujos
-			listaDePuntos.add(new Pincel(ArrList2,grosor,color));
+			listaDePuntos.add((ArrList2));
 			
 			//limpiamos el trazo actual
 			puntos.clear();		
@@ -308,12 +319,12 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 	public void mouseDragged(MouseEvent e) {
 		if(tool==1) {
 			panel_2.repaint();
-			puntos.add(e.getPoint());
+			puntos.add(new Pincel(e.getX(),e.getY(),grosor,color));
 		}
 		
 		if(tool==5) {
 			panel_2.repaint();
-			figuras.add(new Figura(e.getX(),e.getY(),80,80,5,grosor,color));
+			figuras.add(new Figura(e.getX(),e.getY(),80,80,5,grosor,color,fill));
 		}
 		panel_2.repaint();
 		
@@ -326,12 +337,13 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 	}
 	
 	class Pincel{
-		List<Point>puntos;
-		int grosor;
-		String color;
+		public int x,y;
+		public int grosor;
+		public String color;
 		
-		public Pincel(List<Point>puntos, int grosor, String color) {
-			this.puntos=puntos;
+		public Pincel(int x, int y, int grosor, String color) {
+			this.x=x;
+			this.y=y;
 			this.grosor=grosor;
 			this.color=color;
 		}
@@ -339,9 +351,10 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 	
 	class Figura{
 		public int x,y,w,h,type,grosor;
-		String color;
+		public String color;
+		public boolean fill;
 		
-		public Figura(int x , int y, int w, int h, int type,int grosor,String color) {
+		public Figura(int x , int y, int w, int h, int type,int grosor,String color,boolean fill) {
 			this.x=x;
 			this.y=y;
 			this.w=w;
@@ -349,6 +362,7 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
 			this.type=type;
 			this.grosor=grosor;
 			this.color=color;
+			this.fill=fill;
 		}
 	}
 	
@@ -364,76 +378,62 @@ public class PaintJava extends JFrame implements MouseListener, MouseMotionListe
  	       super.paintComponent(g);
  	       
  	       Graphics2D g2 = (Graphics2D) g; 
- 	       
- 	       for (Pincel pincel : listaDePuntos) {
- 	    	   List<Point> trazo = pincel.puntos;
- 	    	   int grosor= pincel.grosor; 
- 	    	   String color=pincel.color;
- 	    	   g2.setStroke(new BasicStroke(grosor));
- 	    	   g2.setColor(Color.decode(color));
+ 	       for (Iterator iterator = listaDePuntos.iterator(); iterator.hasNext();) {
+ 	    	   List<Pincel> trazo = (List<Pincel>) iterator.next();
  	    	   if(trazo.size()>1) {
- 	    		   
  	    		   for (int i = 1; i < trazo.size(); i++) {
- 	    			   
- 	    			   Point p1 = trazo.get(i-1);
- 	    			   Point p2 = trazo.get(i);
+ 	    			   Pincel p1 = trazo.get(i-1);
+ 	    			   Pincel p2 = trazo.get(i);
+ 	    			   g2.setStroke(new BasicStroke(p1.grosor));
+ 	    			   g2.setColor(Color.decode(p1.color));
  	    			   
  	    			   g2.drawLine(p1.x,p1.y,p2.x,p2.y);
+ 	    			   
+ 	    			   
  	    		   }
- 	    		   
- 	    	   }
- 	    	   
- 	       }
- 	       
- 	       for (Figura trazoFigura : figuras) {
- 	    	   int grosor= trazoFigura.grosor; 
- 	    	   String color=trazoFigura.color;
- 	    	   g2.setStroke(new BasicStroke(grosor));
- 	    	   g2.setColor(Color.decode(color));
- 	    	   if(trazoFigura.type==2) {
- 	    		   g2.drawRect(trazoFigura.x, trazoFigura.y, trazoFigura.w, trazoFigura.h);
- 	    	   }else if(trazoFigura.type==3) {
- 	    		   g2.drawOval(trazoFigura.x,trazoFigura.y, trazoFigura.w, trazoFigura.h);
- 	    	   }else if(trazoFigura.type==4) {
- 	    		   g2.drawLine(trazoFigura.x,trazoFigura.y, trazoFigura.w, trazoFigura.h);
  	    	   }
  	       }
- 	       
  	       
  	       g2.setColor(Color.decode(color)); 
  	       g2.setStroke(new BasicStroke(grosor)); 
- 		   
  	       //dibujar la trayectoria de puntos 
  	       //solo cuando tengo más de 2 puntos
  	       if(puntos.size()>1) {
- 	    	   
  	    	   for (int i = 1; i < puntos.size(); i++) {
- 	    		   
- 	    		   Point p1 = puntos.get(i-1);
- 	    		   Point p2 = puntos.get(i);
- 	    		   
+ 	    		   Pincel p1 = puntos.get(i-1);
+ 	    		   Pincel p2 = puntos.get(i);
+ 	    		   g2.setColor(Color.decode(color)); 
+ 	    		   g2.setStroke(new BasicStroke(grosor)); 
  	    		   g2.drawLine(p1.x,p1.y,p2.x,p2.y);
  	    	   }
- 	    	   
  	       } 
  	       
  	       if(figuras.size()>0 ) {
 	    	   for (int i = 1; i < figuras.size(); i++) {
-	    		   Figura f = figuras.get(i);  
+	    		   Figura f = figuras.get(i);
+	    		   g2.setColor(Color.decode(f.color)); 
+ 	    		   g2.setStroke(new BasicStroke(f.grosor)); 
 	    		   if(f.type==2) {
-	    			   g2.drawRect(f.x, f.y, f.w, f.h);
+	    			   if(!f.fill) {
+	    				   g2.drawRect(f.x, f.y, f.w, f.h);
+	    			   }
+	    			   else {
+	    				   g2.fillRect(f.x, f.y, f.w, f.h);
+	    			   }
 	    		   }else if(f.type==3) {
-		    			g2.drawOval(f.x,f.y, f.w, f.h);
+	    			   if(!f.fill) {
+	    				   g2.drawOval(f.x,f.y, f.w, f.h);
+	    			   }else {
+	    				   g2.fillOval(f.x, f.y, f.w, f.h);
+	    			   }
 	    		   }else if(f.type==4) {
-		    			g2.drawLine(f.x,f.y, f.w, f.h);
+	    				   g2.drawLine(f.x,f.y, f.w, f.h);
 	    		   }else if(f.type==5) {
 		    			g2.clearRect(f.x,f.y, f.w, f.h);
 	    		   }
 	    	   }
 	    	   
 	       }
- 	       
- 
  	   }
  		
  	}
