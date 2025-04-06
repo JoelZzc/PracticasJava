@@ -12,15 +12,19 @@ import practice.PaintJava.Pincel;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Iterator;
 import java.util.List;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Keyboard extends JFrame implements KeyListener {
 
@@ -58,7 +62,7 @@ public class Keyboard extends JFrame implements KeyListener {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		panel = new PaintPanel();
-		panel.setBackground(new Color(128, 255, 255));
+		panel.setBackground(new Color(124, 195, 235));
 		panel.setFocusable(true);
 		panel.addKeyListener(this);
 		contentPane.add(panel, BorderLayout.CENTER);
@@ -71,6 +75,14 @@ public class Keyboard extends JFrame implements KeyListener {
 		panel_1.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("Reiniciar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				x=200;
+				y=200;
+				panel.repaint();
+				panel.requestFocus();
+			}
+		});
 		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 18));
 		contentPane.add(btnNewButton, BorderLayout.SOUTH);
 	}
@@ -88,9 +100,10 @@ public class Keyboard extends JFrame implements KeyListener {
  	       super.paintComponent(g);
  	       
  	       Graphics2D g2 = (Graphics2D) g; 
-		  g2.setColor(Color.red);
-		  g2.fillRect(x, y,50,50);
-		  panel.repaint();
+		  ImageIcon img = new ImageIcon("C:\\Users\\SEARS\\git\\PracticasJava\\Unidad2\\src\\practice\\astronave.png");
+		  Image imagen=img.getImage();		
+		  g2.drawImage(imagen, x, y, 64,64,null);
+
 
  	   }
  		
@@ -109,17 +122,26 @@ public class Keyboard extends JFrame implements KeyListener {
 		
 		if(e.getKeyCode()==87) {
 			y-=10;
+			if (y<0)
+				y=panel.getHeight();
 		}
 		if(e.getKeyCode()==83) {
 			y+=10;
+			if (y>panel.getHeight())
+				y=0;
 		}
 		if(e.getKeyCode()==65) {
 			x-=10;
+			if (x<0)
+				x=panel.getWidth();
 		}
 		if(e.getKeyCode()==68) {
 			x+=10;
+			if (x>panel.getWidth())
+				x=0;
 		}
 		
+		  panel.repaint();
 		
 	}
 
